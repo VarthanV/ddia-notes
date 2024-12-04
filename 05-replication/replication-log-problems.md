@@ -49,3 +49,19 @@
 -  The client can remember the last updated timestamp so that the replica can serve only latest data from the last uopdate time. if replica is not sufficiently upto date the data can be handled by another replica or the query can wait until the replica has caught up.
 
 - The timestamp could be **logical timestamp** something that indicates the order of writes such as log sequence number.
+
+## Monotonic Reads
+
+- An anomaly that can happen when reading from asynchornous follower is that it is possible for users to see moving things backward in time
+
+- This happens when user make several reads from different replicas. 
+
+![alt text](../assets/reading-backwards.png)
+
+- Monotonic Read is a guarantee that this does not happen , it is a lesser guarantee than strong consistency but stronger guarantee than eventual consistency. 
+
+- Monotonic read is something if user makes read in sequence it is guaranteed that they will not read older data after reading newer data.
+
+- One way to achieve monotonic read is to make sure that each read is always made from the same user replica. For example the replica can be choosen based on **hash of userID** rather than randomly.
+
+- If the replica fails, the query will be rerouted to new replica
