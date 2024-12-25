@@ -54,8 +54,3 @@ lock
 ## Leaderless replication (probably not linearizable)
 
 - For systems with leaderless replication we need to obtain strong consistency by requiring quorum reads and writes (w+r>n). Depending on the exact configuration of quorums and depending on how we define strong consistency.
-
-## Linearizability and Quorums
-
-- 
-
